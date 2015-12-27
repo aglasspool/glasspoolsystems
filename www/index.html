@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <title></title>
+  
+  
+  
+  <link rel="stylesheet" href="jquery.mobile-1.3.1.min.css">
+  
+  <!-- Extra Codiqa features -->
+  <link rel="stylesheet" href="codiqa.ext.css">
+  
+  <!-- jQuery and jQuery Mobile -->
+  <script src="jquery-1.9.1.min.js"></script>
+  <script src="jquery.mobile-1.3.1.min.js"></script>
+
+
+
+
+	
+<script>
+$(document).on('pageinit', '#page1', function(){     
+    $(document).on( "expand", "#master", function( event, ui ){
+       
+var data = [],
+t = 0;
+$.getJSON('/data/get/D2', function(data){
+                                   if(data.value == '1') {
+                                   $('#toggleswitch4').val('on').slider("refresh");
+                                   } else {
+                                   $('#toggleswitch4').val('off').slider("refresh");
+         }
+      })   
+});  
+});
+ </script>
+
+<script>
+$(document).on('pageinit', '#page1', function(){     
+    $(document).on( "expand", "#guest", function( event, ui ){
+       
+var data = [],
+t = 0;
+$.getJSON('/data/get/D3', function(data){
+                                   if(data.value == '1') {
+                                   $('#toggleswitch7').val('on').slider("refresh");
+                                   } else {
+                                   $('#toggleswitch7').val('off').slider("refresh");
+         }
+      })   
+});  
+});
+ </script>
+
+<script>
+$(document).on('pageinit', '#page1', function(){     
+    $(document).on( "expand", "#kitchen", function( event, ui ){
+       
+var data = [],
+t = 0;
+$.getJSON('/data/get/D4', function(data){
+                                   if(data.value == '1') {
+                                   $('#toggleswitch3').val('on').slider("refresh");
+                                   } else {
+                                   $('#toggleswitch3').val('off').slider("refresh");
+         }
+      })   
+});  
+});
+ </script>
+
+<script>
+$(document).on('pageinit', '#page1', function(){     
+    $(document).on( "expand", "#lounge", function( event, ui ){
+       
+var data = [],
+t = 0;
+$.getJSON('/data/get/D9', function(data){
+                                   if(data.value == '1') {
+                                   $('#toggleswitch5').val('on').slider("refresh");
+                                   } else {
+                                   $('#toggleswitch5').val('off').slider("refresh");
+         }
+      })   
+});  
+});
+ </script>
+
+<script>
+$(document).on('pageinit', '#page1', function(){     
+    $(document).on( "expand", "#office", function( event, ui ){
+       
+var data = [],
+t = 0;
+$.getJSON('/data/get/D6', function(data){
+                                   if(data.value == '1') {
+                                   $('#toggleswitch9').val('on').slider("refresh");
+                                   } else {
+                                   $('#toggleswitch9').val('off').slider("refresh");
+         }
+      })   
+});  
+});
+ </script>
+
+<script>
+$(document).on('pageinit', '#page1', function(){     
+    $(document).on( "expand", "#nursery", function( event, ui ){
+       
+var data = [],
+t = 0;
+$.getJSON('/data/get/D7', function(data){
+                                   if(data.value == '1') {
+                                   $('#toggleswitch8').val('on').slider("refresh");
+                                   } else {
+                                   $('#toggleswitch8').val('off').slider("refresh");
+         }
+      })   
+});  
+});
+ </script>
+
+<script>
+$(document).on('pageinit', '#page1', function(){     
+    $(document).on( "expand", "#utility", function( event, ui ){
+       
+var data = [],
+t = 0;
+$.getJSON('/data/get/D5', function(data){
+                                   if(data.value == '1') {
+                                   $('#toggleswitch1').val('on').slider("refresh");
+                                   } else {
+                                   $('#toggleswitch1').val('off').slider("refresh");
+         }
+      })   
+});  
+});
+ </script>
+
+<script>
+$(document).on('pageinit', '#page1', function(){     
+    $(document).on( "expand", "#dining", function( event, ui ){
+       
+var data = [],
+t = 0;
+$.getJSON('/data/get/D8', function(data){
+                                   if(data.value == '1') {
+                                   $('#toggleswitch2').val('on').slider("refresh");
+                                   } else {
+                                   $('#toggleswitch2').val('off').slider("refresh");
+         }
+      })   
+});  
+});
+ </script>
+
+<script>
+$(document).on('pageinit', '#page1', function(){     
+    $(document).on( "expand", "#hallway", function( event, ui ){
+       
+var data = [],
+t = 0;
+$.getJSON('/data/get/D10', function(data){
+                                   if(data.value == '1') {
+                                   $('#toggleswitch6').val('on').slider("refresh");
+                                   } else {
+                                   $('#toggleswitch6').val('off').slider("refresh");
+         }
+      })   
+});  
+});
+ </script>
+
+<script>
+$(document).on('pageinit', '#page1', function(){     
+    $(document).on( "expand", "#conservatory", function( event, ui ){
+       
+var data = [],
+t = 0;
+$.getJSON('/data/get/D12', function(data){
+                                   if(data.value == '1') {
+                                   $('#toggleswitch11').val('on').slider("refresh");
+                                   } else {
+                                   $('#toggleswitch11').val('off').slider("refresh");
+         }
+      })   
+});  
+});
+ </script>
+
+<script>
+$(document).on('pageinit', '#page1', function(){     
+    $(document).on( "expand", "#bathrooms", function( event, ui ){
+       
+var data = [],
+t = 0;
+$.getJSON('/data/get/D11', function(data){
+                                   if(data.value == '1') {
+                                   $('#toggleswitch10').val('on').slider("refresh");
+                                   } else {
+                                   $('#toggleswitch10').val('off').slider("refresh");
+         }
+      })   
+});  
+});
+ </script>
+
+
+
+<script>
+   
+    $(document).on( "expand", "#tank", function( event, ui ){
+       
+$.get( "/arduino/temperature", function( data ) {
+  $( "#room1" ).html( data );
+});
+  
+});  
+
+ </script>
+
+
+ 
+
+   
+</head>
+<body>
+
+
+
+
+
+<!-- Home -->
+<div data-role="page" id="page1">
+    <div data-theme="a" data-role="header">
+        <h3>
+            Harts Heating Control
+        </h3>
+    </div>
+
+
+
+    <div data-role="content">
+        <div data-role="collapsible-set">
+            <div data-role="collapsible" id="tank">
+                <h3>
+                    Room Temperatures
+                </h3>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        
+                        <div id=room1>
+                            Loading room temperatures...
+
+ 
+		
+</div>
+                       
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div data-role="collapsible-set">
+            <div data-role="collapsible" data-collapsed="true">
+                
+                </div>
+            </div>
+        </div>
+        
+
+<div data-role="content">
+        <div data-role="collapsible-set">
+<div data-role="collapsible" id="master">
+                <h3>
+                    Master Bedroom
+                </h3>
+                <div data-role="fieldcontain">
+                    <select name="toggleswitch4" id="toggleswitch4" data-theme="" data-role="slider">
+                        <option value="off">
+                            Off
+                        </option>
+                        <option value="on">
+                            On
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div data-role="collapsible" id="guest">
+                <h3>
+                    Guest Bedroom
+                </h3>
+                <div data-role="fieldcontain">
+                    <select name="toggleswitch7" id="toggleswitch7" data-theme="" data-role="slider">
+                        <option value="off">
+                            Off
+                        </option>
+                        <option value="on">
+                            On
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div data-role="collapsible" id="kitchen">
+                <h3>
+                    Kitchen
+                </h3>
+                <div data-role="fieldcontain">
+                    <select name="toggleswitch3" id="toggleswitch3" data-theme="" data-role="slider">
+                        <option value="off">
+                            Off
+                        </option>
+                        <option value="on">
+                            On
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div data-role="collapsible" id="lounge">
+                <h3>
+                    Lounge (Posh Room)
+                </h3>
+                <div data-role="fieldcontain">
+                    <select name="toggleswitch5" id="toggleswitch5" data-theme="" data-role="slider">
+                        <option value="off">
+                            Off
+                        </option>
+                        <option value="on">
+                            On
+                        </option>
+                    </select>
+                </div>
+            </div>
+            
+            <div data-role="collapsible" id="nursery">
+                <h3>
+                    Nursery
+                </h3>
+                <div data-role="fieldcontain">
+                    <select name="toggleswitch8" id="toggleswitch8" data-theme="" data-role="slider">
+                        <option value="off">
+                            Off
+                        </option>
+                        <option value="on">
+                            On
+                        </option>
+                    </select>
+                </div>
+               
+            </div>
+<div data-role="collapsible" id="utility">
+                <h3>
+                    Utility Rm
+                </h3>
+                <div data-role="fieldcontain">
+                    <select name="toggleswitch1" id="toggleswitch1" data-theme="" data-role="slider">
+                        <option value="off">
+                            Off
+                        </option>
+                        <option value="on">
+                            On
+                        </option>
+                    </select>
+                </div>
+               
+            </div>
+<div data-role="collapsible" id="dining">
+                <h3>
+                    Dining Rm
+                </h3>
+                <div data-role="fieldcontain">
+                    <select name="toggleswitch2" id="toggleswitch2" data-theme="" data-role="slider">
+                        <option value="off">
+                            Off
+                        </option>
+                        <option value="on">
+                            On
+                        </option>
+                    </select>
+                </div>
+               
+            </div>
+<div data-role="collapsible" id="hallway">
+                <h3>
+                    Hallway
+                </h3>
+                <div data-role="fieldcontain">
+                    <select name="toggleswitch6" id="toggleswitch6" data-theme="" data-role="slider">
+                        <option value="off">
+                            Off
+                        </option>
+                        <option value="on">
+                            On
+                        </option>
+                    </select>
+                </div>
+               
+            </div>
+
+<div data-role="collapsible" id="conservatory">
+                <h3>
+                    Conservatory
+                </h3>
+                <div data-role="fieldcontain">
+                    <select name="toggleswitch11" id="toggleswitch11" data-theme="" data-role="slider">
+                        <option value="off">
+                            Off
+                        </option>
+                        <option value="on">
+                            On
+                        </option>
+                    </select>
+                </div>
+               
+            </div>
+
+<div data-role="collapsible" id="bathrooms">
+                <h3>
+                    Bathrooms (towel rails)
+                </h3>
+                <div data-role="fieldcontain">
+                    <select name="toggleswitch10" id="toggleswitch10" data-theme="" data-role="slider">
+                        <option value="off">
+                            Off
+                        </option>
+                        <option value="on">
+                            On
+                        </option>
+                    </select>
+                </div>
+               
+            </div>
+            <div data-role="collapsible" id="office">
+                <h3>
+                    Office
+                </h3>
+ <div data-role="fieldcontain">
+                    <select name="toggleswitch9" id="toggleswitch9" data-theme="" data-role="slider">
+                        <option value="off">
+                            Off
+                        </option>
+                        <option value="on">
+                            On
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    </div>
+</div>
+
+<script>
+    
+$('#toggleswitch10').on( 'slidestop', function(event, ui) {
+             if($(this).val()=='on') {
+             $.get('/arduino/digital/11/1');
+             } else {
+             $.get('/arduino/digital/11/0');         
+ }
+    });
+</script>
+
+<script>
+    
+$('#toggleswitch6').on( 'slidestop', function(event, ui) {
+             if($(this).val()=='on') {
+             $.get('/arduino/digital/10/1');
+             } else {
+             $.get('/arduino/digital/10/0');         
+ }
+    });
+</script>
+
+<script>
+    
+$('#toggleswitch11').on( 'slidestop', function(event, ui) {
+             if($(this).val()=='on') {
+             $.get('/arduino/digital/12/1');
+             } else {
+             $.get('/arduino/digital/12/0');         
+ }
+    });
+</script>
+
+
+<script>
+    
+$('#toggleswitch2').on( 'slidestop', function(event, ui) {
+             if($(this).val()=='on') {
+             $.get('/arduino/digital/8/1');
+             } else {
+             $.get('/arduino/digital/8/0');         
+ }
+    });
+</script>
+
+<script>
+    
+$('#toggleswitch1').on( 'slidestop', function(event, ui) {
+             if($(this).val()=='on') {
+             $.get('/arduino/digital/5/1');
+             } else {
+             $.get('/arduino/digital/5/0');         
+ }
+    });
+</script>
+
+
+ 
+
+<script>
+    
+$('#toggleswitch3').on( 'slidestop', function(event, ui) {
+             if($(this).val()=='on') {
+             $.get('/arduino/digital/4/1');
+             } else {
+             $.get('/arduino/digital/4/0');         
+ }
+    });
+</script>
+
+<script>
+
+$('#toggleswitch5').on( 'slidestop', function(event, ui) {
+             if($(this).val()=='on') {
+             $.get('/arduino/digital/9/1');
+             } else {
+             $.get('/arduino/digital/9/0');         
+ }
+    });
+</script>
+
+<script>
+
+$('#toggleswitch4').on( 'slidestop', function(event, ui) {
+             if($(this).val()=='on') {
+             $.get('/arduino/digital/2/1');
+             } else {
+             $.get('/arduino/digital/2/0');         
+ }
+    });
+</script>
+
+<script>
+
+$('#toggleswitch7').on( 'slidestop', function(event, ui) {
+             if($(this).val()=='on') {
+             $.get('/arduino/digital/3/1');
+             } else {
+             $.get('/arduino/digital/3/0');         
+ }
+    });
+</script>
+
+<script>
+
+$('#toggleswitch8').on( 'slidestop', function(event, ui) {
+             if($(this).val()=='on') {
+             $.get('/arduino/digital/7/1');
+             } else {
+             $.get('/arduino/digital/7/0');         
+ }
+    });
+</script>
+
+<script>
+
+$('#toggleswitch9').on( 'slidestop', function(event, ui) {
+             if($(this).val()=='on') {
+             $.get('/arduino/digital/6/1');
+             } else {
+             $.get('/arduino/digital/6/0');         
+ }
+    });
+</script>
+
+
+
+
+</body>
+</html>
