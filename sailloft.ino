@@ -9,7 +9,15 @@ int relayOff(String command);
 int isRelayOn(String command);
 float hysteresis = 0.5;
 int led2 = D7;
+/*
+The following is required to repair a problem with the photon when it is flashing cyan/occasionally also with red:
+particle keys new
+particle keys load device.pem
+particle keys send <device_id> device.pub.pem
 
+// grab this file https://s3.amazonaws.com/spark-website/cloud_public.der
+particle keys server cloud_public.der
+*/
 
 /*
 Use this sketch to read the temperature from 1-Wire devices
