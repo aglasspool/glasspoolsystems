@@ -6,8 +6,10 @@ RelayShield myRelays;
 // Create prototypes of the Spark.functions we'll declare in setup()
 int relayOn(String command);
 int relayOff(String command);
+int isRelayOn(String command);
 float hysteresis = 0.5;
 int led2 = D7;
+
 
 /*
 Use this sketch to read the temperature from 1-Wire devices
@@ -73,7 +75,8 @@ void setup() {
 
     // Register Spark.functions and assign them names
     Spark.function("relayOn", relayOn);
-    Spark.function("relayOff", relayOff);
+    Spark.function("relayOff", relayOff); 
+    Spark.function("isRelayOn", isRelayOn);
   
   
 }
@@ -207,15 +210,15 @@ void loop(void) {
     case 0xA4:
       Serial.println("  Sensor number 5");
       sprintf(zone5temp, "%.2f", celsius);
-      if ((Time.hour()>=8 && Time.hour()<=18) && (Time.weekday()!=2 || Time.weekday()!=7) && (celsius < (28 - hysteresis)))
+      if ((Time.hour()>=8 && Time.hour()<=18) && (Time.weekday()!=1 || Time.weekday()!=7) && (celsius < (28 - hysteresis)))
       {
           digitalWrite(led2, HIGH);    // if it's between 8am and 5pm and not a saturday(1) or a sunday(7) weekday and below 24.5 degrees, then turn on led2. 
       }
-      else if ((Time.hour()>=8 && Time.hour()<=18) && (Time.weekday()!=2 || Time.weekday()!=7) && (celsius > (28 + hysteresis)))
+      else if ((Time.hour()>=8 && Time.hour()<=18) && (Time.weekday()!=1 || Time.weekday()!=7) && (celsius > (28 + hysteresis)))
       {
           digitalWrite(led2, LOW);   // else if its working hours and too hot then turn it off.
       }
-      else if ((Time.hour()>18) || (Time.weekday()==2) || (Time.weekday()==7))
+      else if ((Time.hour()>18) || (Time.weekday()==1) || (Time.weekday()==7))
       {
           digitalWrite(led2, LOW);   // else if it's past home time or it's Sat or Sun then turn it off.
       }
@@ -243,6 +246,24 @@ void loop(void) {
   
 }
 
+
+int isRelayOn(String command){
+    // Ritual incantation to convert String into Int
+    char inputStr[64];
+    command.toCharArray(inputStr,64);
+    int i = atoi(inputStr);
+    
+    
+    if(myRelays.isOn(i))
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
 int relayOn(String command){
     // Ritual incantation to convert String into Int
     char inputStr[64];
@@ -268,4 +289,3 @@ int relayOff(String command){
     // Respond
     return 1;    
 }
-
