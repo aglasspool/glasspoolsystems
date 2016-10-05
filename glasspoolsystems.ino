@@ -349,6 +349,7 @@ sensorsC.requestTemperatures();
   {
     digitalWrite(11, LOW); //turn on towel rails
     digitalWrite(A0, LOW); //and Start the circulating pump on Analog Pin A0
+    delay(120000); //added two minute delay to stop flickering problem
   }
   
 //The following checks to see if all valves are off - if true then it shuts off the circulating valve     
