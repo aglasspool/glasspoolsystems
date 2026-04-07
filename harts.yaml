@@ -84,9 +84,55 @@ sensor:
   - platform: dallas_temp
     address: 0x7b000005920d9528
     name: "Kitchen Diner"
+    id: kitchendiner_sensor
     one_wire_id: bus2
 
   - platform: dallas_temp
     address: 0x0e0000058f1a3d28
     name: "Conservatory"
+    id: conservatory_sensor
     one_wire_id: bus2
+
+switch:
+  - platform: gpio
+    pin: GPIO5
+    name: "Conservatory Relay"
+    id: conservatory_relay
+    
+switch:
+  - platform: gpio
+    pin: GPIO5
+    name: "Kitchen Diner Relay"
+    id: kitchendiner_relay
+
+    # Example single-point configuration entry (for heating only)
+climate:
+  - platform: thermostat
+    name: "Conservatory Climate Controller"
+    sensor: conservatory_sensor
+    min_heating_off_time: 300s
+    min_heating_run_time: 300s
+    min_idle_time: 30s
+    heat_action:
+      - switch.turn_on: conservatory_relay
+    idle_action:
+      - switch.turn_off: conservatory_relay
+    default_preset: Home
+    preset:
+      - name: Home
+        default_target_temperature_low: 20 °C
+
+  - platform: thermostat
+    name: "Kitchen/Diner Climate Controller"
+    sensor: kitchendiner_sensor
+    min_heating_off_time: 300s
+    min_heating_run_time: 300s
+    min_idle_time: 30s
+    heat_action:
+      - switch.turn_on: kitchendiner_relay
+    idle_action:
+      - switch.turn_off: kitchendiner_relay
+    default_preset: Home
+    preset:
+      - name: Home
+        default_target_temperature_low: 20 °C
