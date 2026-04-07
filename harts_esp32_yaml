@@ -1,0 +1,92 @@
+esphome:
+  name: hartstemps
+
+esp32:
+  board: esp32dev
+  framework:
+    type: esp-idf
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "/D9nyhDU/wRC7/9qwAXKlGBdRP8u43Dgn6kBGFfGp+E="
+
+ota:
+  - platform: esphome
+
+
+wifi:
+  ssid: "BT-NKFJ5G"
+  password: "hL3aYUQLk9Tatn"
+
+one_wire:
+  - platform: gpio
+    pin: GPIO04    
+    id: bus1
+
+  - platform: gpio
+    pin: GPIO14
+    id: bus2
+sensor:
+  - platform: dallas_temp
+    address: 0x990000058fad5028
+    name: "Penny's Room"
+    one_wire_id: bus1
+
+  - platform: dallas_temp
+    address: 0xb000000591d37c28
+    name: "Posh Room"
+    one_wire_id: bus1
+
+  - platform: dallas_temp
+    address: 0xa200000591da2628
+    name: "Abbey's Room"
+    one_wire_id: bus1
+
+  - platform: dallas_temp
+    address: 0xeb0000058fc11128
+    name: "Upstairs Bathroom"
+    one_wire_id: bus1
+
+  - platform: dallas_temp
+    address: 0x660000058e7c1928
+    name: "Kitchen"
+    one_wire_id: bus1
+
+  - platform: dallas_temp
+    address: 0x7f0000057c79e328
+    name: "Utility Room"
+    one_wire_id: bus1
+
+  - platform: dallas_temp
+    address: 0x22000005920fa428
+    name: "Nick's Room"
+    one_wire_id: bus2
+
+  - platform: dallas_temp
+    address: 0xaa0000058fb15228
+    name: "Master Bedroom"
+    one_wire_id: bus2
+
+  - platform: dallas_temp
+    address: 0xcb0000057cffaa28
+    name: "Hallway"
+    one_wire_id: bus2
+
+  - platform: dallas_temp
+    address: 0xb400000591fb9928
+    name: "Hot Water Tank"
+    one_wire_id: bus2
+
+  - platform: dallas_temp
+    address: 0x7b000005920d9528
+    name: "Kitchen Diner"
+    one_wire_id: bus2
+
+  - platform: dallas_temp
+    address: 0x0e0000058f1a3d28
+    name: "Conservatory"
+    one_wire_id: bus2
