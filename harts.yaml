@@ -19,93 +19,402 @@ ota:
 
 
 wifi:
-  ssid: "BT-NKFJ5G"
-  password: "hL3aYUQLk9Tatn"
+  ssid: "Linksys28572"
+  password: "tz**********nch"
 
 one_wire:
   - platform: gpio
-    pin: GPIO04    
+    pin: GPIO22    
     id: bus1
 
   - platform: gpio
-    pin: GPIO14
+    pin: GPIO23
     id: bus2
+
 sensor:
   - platform: dallas_temp
     address: 0x990000058fad5028
     name: "Penny's Room"
     one_wire_id: bus1
+    id: pennysroom_sensor
 
   - platform: dallas_temp
     address: 0xb000000591d37c28
     name: "Posh Room"
     one_wire_id: bus1
+    id: poshroom_sensor
 
   - platform: dallas_temp
     address: 0xa200000591da2628
     name: "Abbey's Room"
     one_wire_id: bus1
+    id: abbeysroom_sensor
 
   - platform: dallas_temp
     address: 0xeb0000058fc11128
     name: "Upstairs Bathroom"
     one_wire_id: bus1
+    id: upstairsbathroom_sensor
 
   - platform: dallas_temp
     address: 0x660000058e7c1928
     name: "Kitchen"
     one_wire_id: bus1
+    id: kitchen_sensor
 
   - platform: dallas_temp
     address: 0x7f0000057c79e328
     name: "Utility Room"
     one_wire_id: bus1
+    id: utilityroom_sensor
 
   - platform: dallas_temp
     address: 0x22000005920fa428
     name: "Nick's Room"
     one_wire_id: bus2
+    id: nicksroom_sensor
 
   - platform: dallas_temp
     address: 0xaa0000058fb15228
     name: "Master Bedroom"
     one_wire_id: bus2
+    id: masterbedroom_sensor
 
   - platform: dallas_temp
     address: 0xcb0000057cffaa28
     name: "Hallway"
     one_wire_id: bus2
+    id: hallway_sensor
+
+  - platform: dallas_temp
+    address: 0x7b000005920d9528
+    name: "Kitchen Diner"
+    one_wire_id: bus2
+    id: kitchendiner_sensor
+
+  - platform: dallas_temp
+    address: 0x0e0000058f1a3d28
+    name: "Conservatory"
+    one_wire_id: bus2
+    id: conservatory_sensor
 
   - platform: dallas_temp
     address: 0xb400000591fb9928
     name: "Hot Water Tank"
     one_wire_id: bus2
-
-  - platform: dallas_temp
-    address: 0x7b000005920d9528
-    name: "Kitchen Diner"
-    id: kitchendiner_sensor
-    one_wire_id: bus2
-
-  - platform: dallas_temp
-    address: 0x0e0000058f1a3d28
-    name: "Conservatory"
-    id: conservatory_sensor
-    one_wire_id: bus2
+    id: hotwatertank_sensor
+    on_value_range:
+        - above: 75.0
+          then:
+            - switch.turn_on: upstairsbathroom_relay
 
 switch:
   - platform: gpio
-    pin: GPIO5
     name: "Conservatory Relay"
     id: conservatory_relay
+    restore_mode: ALWAYS_ON
+    on_turn_on:
+      - switch.turn_on: circulationpump_relay
+    on_turn_off:
+      then:
+        - if:
+            condition:
+              and:
+                - switch.is_off: poshroom_relay
+                - switch.is_off: abbeysroom_relay
+                - switch.is_off: nicksroom_relay
+                - switch.is_off: masterbedroom_relay
+                - switch.is_off: upstairsbathroom_relay
+                - switch.is_off: kitchendiner_relay
+                - switch.is_off: kitchen_relay
+                - switch.is_off: utilityroom_relay
+                - switch.is_off: pennysroom_relay
+                - switch.is_off: hallway_relay
+            then:
+               - switch.turn_off: circulationpump_relay
+    pin:
+      number: GPIO16
+      inverted: true
     
-switch:
   - platform: gpio
-    pin: GPIO5
     name: "Kitchen Diner Relay"
     id: kitchendiner_relay
+    restore_mode: ALWAYS_ON
+    on_turn_on:
+      - switch.turn_on: circulationpump_relay
+    on_turn_off:
+      then:
+        - if:
+            condition:
+              and:
+                - switch.is_off: poshroom_relay
+                - switch.is_off: abbeysroom_relay
+                - switch.is_off: nicksroom_relay
+                - switch.is_off: masterbedroom_relay
+                - switch.is_off: upstairsbathroom_relay
+                - switch.is_off: pennysroom_relay
+                - switch.is_off: kitchen_relay
+                - switch.is_off: utilityroom_relay
+                - switch.is_off: conservatory_relay
+                - switch.is_off: hallway_relay
+            then:
+               - switch.turn_off: circulationpump_relay
+    pin:
+      number: GPIO33
+      inverted: true
 
-    # Example single-point configuration entry (for heating only)
+  - platform: gpio
+    name: "Hallway Relay"
+    id: hallway_relay
+    restore_mode: ALWAYS_ON
+    on_turn_on:
+      - switch.turn_on: circulationpump_relay
+    on_turn_off:
+      then:
+        - if:
+            condition:
+              and:
+                - switch.is_off: poshroom_relay
+                - switch.is_off: abbeysroom_relay
+                - switch.is_off: nicksroom_relay
+                - switch.is_off: masterbedroom_relay
+                - switch.is_off: upstairsbathroom_relay
+                - switch.is_off: kitchendiner_relay
+                - switch.is_off: kitchen_relay
+                - switch.is_off: utilityroom_relay
+                - switch.is_off: conservatory_relay
+                - switch.is_off: pennysroom_relay
+            then:
+               - switch.turn_off: circulationpump_relay
+    pin:
+      number: GPIO4
+      inverted: true
+
+  - platform: gpio
+    name: "Master Bedroom Relay"
+    id: masterbedroom_relay
+    restore_mode: ALWAYS_ON
+    on_turn_on:
+      - switch.turn_on: circulationpump_relay
+    on_turn_off:
+      then:
+        - if:
+            condition:
+              and:
+                - switch.is_off: poshroom_relay
+                - switch.is_off: abbeysroom_relay
+                - switch.is_off: nicksroom_relay
+                - switch.is_off: pennysroom_relay
+                - switch.is_off: upstairsbathroom_relay
+                - switch.is_off: kitchendiner_relay
+                - switch.is_off: kitchen_relay
+                - switch.is_off: utilityroom_relay
+                - switch.is_off: conservatory_relay
+                - switch.is_off: hallway_relay
+            then:
+               - switch.turn_off: circulationpump_relay
+    pin:
+      number: GPIO13
+      inverted: true
+
+  - platform: gpio
+    name: "Nick's Room Relay"
+    id: nicksroom_relay
+    restore_mode: ALWAYS_ON
+    on_turn_on:
+      - switch.turn_on: circulationpump_relay
+    on_turn_off:
+      then:
+        - if:
+            condition:
+              and:
+                - switch.is_off: poshroom_relay
+                - switch.is_off: abbeysroom_relay
+                - switch.is_off: pennysroom_relay
+                - switch.is_off: masterbedroom_relay
+                - switch.is_off: upstairsbathroom_relay
+                - switch.is_off: kitchendiner_relay
+                - switch.is_off: kitchen_relay
+                - switch.is_off: utilityroom_relay
+                - switch.is_off: conservatory_relay
+                - switch.is_off: hallway_relay
+            then:
+               - switch.turn_off: circulationpump_relay
+    pin:
+      number: GPIO21
+      inverted: true
+
+  - platform: gpio
+    name: "Utility Room Relay"
+    id: utilityroom_relay
+    restore_mode: ALWAYS_ON
+    on_turn_on:
+      - switch.turn_on: circulationpump_relay
+    on_turn_off:
+      then:
+        - if:
+            condition:
+              and:
+                - switch.is_off: poshroom_relay
+                - switch.is_off: abbeysroom_relay
+                - switch.is_off: nicksroom_relay
+                - switch.is_off: masterbedroom_relay
+                - switch.is_off: upstairsbathroom_relay
+                - switch.is_off: kitchendiner_relay
+                - switch.is_off: kitchen_relay
+                - switch.is_off: pennysroom_relay
+                - switch.is_off: conservatory_relay
+                - switch.is_off: hallway_relay
+            then:
+               - switch.turn_off: circulationpump_relay
+    pin:
+      number: GPIO27
+      inverted: true
+
+  - platform: gpio
+    name: "Kitchen Relay"
+    id: kitchen_relay
+    restore_mode: ALWAYS_ON
+    on_turn_on:
+      - switch.turn_on: circulationpump_relay
+    on_turn_off:
+      then:
+        - if:
+            condition:
+              and:
+                - switch.is_off: poshroom_relay
+                - switch.is_off: abbeysroom_relay
+                - switch.is_off: nicksroom_relay
+                - switch.is_off: masterbedroom_relay
+                - switch.is_off: upstairsbathroom_relay
+                - switch.is_off: kitchendiner_relay
+                - switch.is_off: pennysroom_relay
+                - switch.is_off: utilityroom_relay
+                - switch.is_off: conservatory_relay
+                - switch.is_off: hallway_relay
+            then:
+               - switch.turn_off: circulationpump_relay
+    pin:
+      number: GPIO14
+      inverted: true
+
+  - platform: gpio
+    name: "Upstairs Bathroom Relay"
+    id: upstairsbathroom_relay
+    restore_mode: ALWAYS_ON
+    on_turn_on:
+      - switch.turn_on: circulationpump_relay
+    on_turn_off:
+      then:
+        - if:
+            condition:
+              and:
+                - switch.is_off: poshroom_relay
+                - switch.is_off: abbeysroom_relay
+                - switch.is_off: nicksroom_relay
+                - switch.is_off: masterbedroom_relay
+                - switch.is_off: pennysroom_relay
+                - switch.is_off: kitchendiner_relay
+                - switch.is_off: kitchen_relay
+                - switch.is_off: utilityroom_relay
+                - switch.is_off: conservatory_relay
+                - switch.is_off: hallway_relay
+            then:
+               - switch.turn_off: circulationpump_relay
+    pin:
+      number: GPIO5
+      inverted: true
+
+  - platform: gpio
+    name: "Abbey's Room Relay"
+    id: abbeysroom_relay
+    restore_mode: ALWAYS_ON
+    on_turn_on:
+      - switch.turn_on: circulationpump_relay
+    on_turn_off:
+      then:
+        - if:
+            condition:
+              and:
+                - switch.is_off: poshroom_relay
+                - switch.is_off: pennysroom_relay
+                - switch.is_off: nicksroom_relay
+                - switch.is_off: masterbedroom_relay
+                - switch.is_off: upstairsbathroom_relay
+                - switch.is_off: kitchendiner_relay
+                - switch.is_off: kitchen_relay
+                - switch.is_off: utilityroom_relay
+                - switch.is_off: conservatory_relay
+                - switch.is_off: hallway_relay
+            then:
+               - switch.turn_off: circulationpump_relay
+    pin:
+      number: GPIO25
+      inverted: true
+
+  - platform: gpio
+    name: "Posh Room Relay"
+    id: poshroom_relay
+    restore_mode: ALWAYS_ON
+    on_turn_on:
+      - switch.turn_on: circulationpump_relay
+    on_turn_off:
+      then:
+        - if:
+            condition:
+              and:
+                - switch.is_off: pennysroom_relay
+                - switch.is_off: abbeysroom_relay
+                - switch.is_off: nicksroom_relay
+                - switch.is_off: masterbedroom_relay
+                - switch.is_off: upstairsbathroom_relay
+                - switch.is_off: kitchendiner_relay
+                - switch.is_off: kitchen_relay
+                - switch.is_off: utilityroom_relay
+                - switch.is_off: conservatory_relay
+                - switch.is_off: hallway_relay
+            then:
+               - switch.turn_off: circulationpump_relay
+    pin:
+      number: GPIO32
+      inverted: true
+ 
+  - platform: gpio
+    name: "Penny's Room Relay"
+    id: pennysroom_relay
+    restore_mode: ALWAYS_ON
+    on_turn_on:
+      - switch.turn_on: circulationpump_relay
+    on_turn_off:
+      then:
+        - if:
+            condition:
+              and:
+                - switch.is_off: poshroom_relay
+                - switch.is_off: abbeysroom_relay
+                - switch.is_off: nicksroom_relay
+                - switch.is_off: masterbedroom_relay
+                - switch.is_off: upstairsbathroom_relay
+                - switch.is_off: kitchendiner_relay
+                - switch.is_off: kitchen_relay
+                - switch.is_off: utilityroom_relay
+                - switch.is_off: conservatory_relay
+                - switch.is_off: hallway_relay
+            then:
+               - switch.turn_off: circulationpump_relay
+    pin:
+      number: GPIO26
+      inverted: true
+
+  - platform: gpio
+    name: "Circulation Pump"
+    id: circulationpump_relay
+    restore_mode: ALWAYS_OFF
+    pin:
+      number: GPIO17
+      inverted: true
+# I'm not sure why I had to change restore_mode ALWAYS_ON to ALWAYS_OFF in order for the circulating pump to work..
+
 climate:
   - platform: thermostat
     name: "Conservatory Climate Controller"
@@ -123,7 +432,7 @@ climate:
         default_target_temperature_low: 20 °C
 
   - platform: thermostat
-    name: "Kitchen/Diner Climate Controller"
+    name: "Kitchen-Diner Climate Controller"
     sensor: kitchendiner_sensor
     min_heating_off_time: 300s
     min_heating_run_time: 300s
@@ -132,6 +441,141 @@ climate:
       - switch.turn_on: kitchendiner_relay
     idle_action:
       - switch.turn_off: kitchendiner_relay
+    default_preset: Home
+    preset:
+      - name: Home
+        default_target_temperature_low: 20 °C
+
+  - platform: thermostat
+    name: "Penny's Room Climate Controller"
+    sensor: pennysroom_sensor
+    min_heating_off_time: 300s
+    min_heating_run_time: 300s
+    min_idle_time: 30s
+    heat_action:
+      - switch.turn_on: pennysroom_relay
+    idle_action:
+      - switch.turn_off: pennysroom_relay
+    default_preset: Home
+    preset:
+      - name: Home
+        default_target_temperature_low: 20 °C
+
+  - platform: thermostat
+    name: "Posh Room Climate Controller"
+    sensor: poshroom_sensor
+    min_heating_off_time: 300s
+    min_heating_run_time: 300s
+    min_idle_time: 30s
+    heat_action:
+      - switch.turn_on: poshroom_relay
+    idle_action:
+      - switch.turn_off: poshroom_relay
+    default_preset: Home
+    preset:
+      - name: Home
+        default_target_temperature_low: 20 °C
+
+  - platform: thermostat
+    name: "Abbey's Room Climate Controller"
+    sensor: abbeysroom_sensor
+    min_heating_off_time: 300s
+    min_heating_run_time: 300s
+    min_idle_time: 30s
+    heat_action:
+      - switch.turn_on: abbeysroom_relay
+    idle_action:
+      - switch.turn_off: abbeysroom_relay
+    default_preset: Home
+    preset:
+      - name: Home
+        default_target_temperature_low: 20 °C 
+
+  - platform: thermostat
+    name: "Upstairs Bathroom Climate Controller"
+    sensor: upstairsbathroom_sensor
+    min_heating_off_time: 300s
+    min_heating_run_time: 300s
+    min_idle_time: 30s
+    heat_action:
+      - switch.turn_on: upstairsbathroom_relay
+    idle_action:
+      - switch.turn_off: upstairsbathroom_relay
+    default_preset: Home
+    preset:
+      - name: Home
+        default_target_temperature_low: 20 °C 
+
+  - platform: thermostat
+    name: "Kitchen Climate Controller"
+    sensor: kitchen_sensor
+    min_heating_off_time: 300s
+    min_heating_run_time: 300s
+    min_idle_time: 30s
+    heat_action:
+      - switch.turn_on: kitchen_relay
+    idle_action:
+      - switch.turn_off: kitchen_relay
+    default_preset: Home
+    preset:
+      - name: Home
+        default_target_temperature_low: 20 °C  
+
+  - platform: thermostat
+    name: "Utility Room Climate Controller"
+    sensor: utilityroom_sensor
+    min_heating_off_time: 300s
+    min_heating_run_time: 300s
+    min_idle_time: 30s
+    heat_action:
+      - switch.turn_on: utilityroom_relay
+    idle_action:
+      - switch.turn_off: utilityroom_relay
+    default_preset: Home
+    preset:
+      - name: Home
+        default_target_temperature_low: 20 °C 
+
+  - platform: thermostat
+    name: "Nick's Room Climate Controller"
+    sensor: nicksroom_sensor
+    min_heating_off_time: 300s
+    min_heating_run_time: 300s
+    min_idle_time: 30s
+    heat_action:
+      - switch.turn_on: nicksroom_relay
+    idle_action:
+      - switch.turn_off: nicksroom_relay
+    default_preset: Home
+    preset:
+      - name: Home
+        default_target_temperature_low: 20 °C 
+
+  - platform: thermostat
+    name: "Master Bedroom Climate Controller"
+    sensor: masterbedroom_sensor
+    min_heating_off_time: 300s
+    min_heating_run_time: 300s
+    min_idle_time: 30s
+    heat_action:
+      - switch.turn_on: masterbedroom_relay
+    idle_action:
+      - switch.turn_off: masterbedroom_relay
+    default_preset: Home
+    preset:
+      - name: Home
+        default_target_temperature_low: 20 °C
+
+  - platform: thermostat
+    name: "Hallway Climate Controller"
+    sensor: hallway_sensor
+    min_heating_off_time: 300s
+    min_heating_run_time: 300s
+    min_idle_time: 30s
+    heat_action:
+      - switch.turn_on: hallway_relay
+    idle_action:
+      - switch.turn_off: hallway_relay
     default_preset: Home
     preset:
       - name: Home
