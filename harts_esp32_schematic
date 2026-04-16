@@ -5,15 +5,15 @@
                in│VP                  D22│-Bus1
                in│VN                  TX0│x
                in│D34                 RX0│x
-8Pin Relay▼    in│D35                 D21│
-           <-In1-│D32                 D19│
-           <-In2-│D33                 D18│        ▼4Pin Relay Board
-           <-In3-│D25                  D5│!-In1->
-           <-In4-│D26                 D17│-In2->
-           <-In5-│D27                 D16│-In3->
-           <-In6-│D14                  D4│-In4->
-           <-In7-│D12                  D2│!
-           <-In8-│D13                 D15│!
+8Pin Relay▼    in│D35                 D21│ 
+Posh Rm    <-In1-│D32                 D19│-*In7-> GPIO19 (Nick's Room)
+Kitchen/Din<-In2-│D33                 D18│        ▼4Pin Relay Board
+Abbeys Rm  <-In3-│D25                  D5│!-In1-> GPIO5 (Upstairs Bathroom)
+Pennys Rm  <-In4-│D26                 D17│-In2-> GPIO17 (Circulation Pump)
+Utility    <-In5-│D27                 D16│-In3-> GPIO16 (Conservatory)
+Kitchen    <-In6-│D14                  D4│-In4-> GPIO4 (Hallway)
+Strapping pin<-*-│D12                  D2│!
+Master Bed <-In8-│D13                 D15│!
              ┌───│GND                 GND│──┐
              ┌───│VIN                 3v3│──┐
              │   └────────────┬──────────┘  │
